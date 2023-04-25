@@ -4,14 +4,15 @@ const API_KEY = '35497294-a51068c2cf702ee7b95a718bd';
 const URL = 'https://pixabay.com/api/';
 const PER_PAGE = 40;
 
-export async function getImages(searchQuery, pageCount) {
+export async function getImages(searchQuery, imageType, pageCount) {
   const params = {
     params: {
       timeout: 1000,
       key: API_KEY,
       q: searchQuery,
-      image_type: 'photo',
-      orientation: 'horizontal',
+      // image_type: 'photo',
+      image_type: imageType,
+      orientation: 'all',
       safesearch: 'true',
       page: pageCount,
       per_page: PER_PAGE,

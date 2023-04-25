@@ -7,6 +7,7 @@ import { getImages } from './js/getImages';
 import { createImageCardMarkup } from './js/createImageCardMarkup';
 
 const PER_PAGE = 40;
+let imageType = 'all';
 let searchQuery = '';
 let pageCount = 1;
 let isLoading = false;
@@ -32,6 +33,7 @@ function onSubmit(e) {
   e.preventDefault();
 
   searchQuery = e.target.searchQuery.value.trim();
+  imageType = e.target.imageType.value;
 
   if (!searchQuery) {
     Notify.failure("We're sorry, but the search string cannot be empty!");
@@ -40,7 +42,7 @@ function onSubmit(e) {
 
   refs.gallery.innerHTML = '';
 
-  e.target.reset();
+  // e.target.reset();
   pageCount = 1;
 
   renderUI();
@@ -50,7 +52,7 @@ async function renderUI() {
   isLoading = true;
 
   try {
-    const response = await getImages(searchQuery, pageCount);
+    const response = await getImages(searchQuery, imageType, pageCount);
 
     const { totalHits, hits } = response;
 
